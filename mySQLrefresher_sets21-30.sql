@@ -93,4 +93,54 @@ ON a.id = t.album_id
 ORDER BY a.title, t.track_number;
 
 
+-- ///////////////////////////////////////////
+-- in SQL, you can save your query as a VIEW and 
+-- re-use that view as if it were a table
+
+-- create the VIEW
+CREATE VIEW trackView AS 
+SELECT id, album_id, title, track_number, duration, duration/60 AS min, duration%60 AS s 
+FROM track;
+SELECT * FROM trackView;
+SELECT name FROM sqlite_master WHERE type = 'view';
+
+-- use the VIEW in a JOIN query
+SELECT a.title AS Album, t.track_number AS TrkNum, t.title AS Track, t.duration AS Secs
+FROM album AS a
+JOIN trackView AS t 
+ON a.id = t.album_id
+WHERE t.duration < 90
+ORDER BY Album, Track;
+
+-- use the VIEW in a JOIN query with SUBSTR() to create MM:SS format in 'duration' column
+SELECT a.title AS Album, t.track_number AS TrkNum, t.title AS Track, 
+t.min || ':' || SUBSTR('00' || t.s, -2, 2) AS duration
+FROM album AS a
+JOIN trackView AS t 
+ON a.id = t.album_id
+-- WHERE t.duration < 90
+ORDER BY Album, Track;
+
+-- create a joined VIEW
+CREATE VIEW joinedAlbum AS
+SELECT a.artist AS artist,
+       a.title AS album,
+       t.title AS track,
+       t.track_number AS trackno,
+       t.duration / 60 AS m,
+       t.duration % 60 AS s
+FROM track AS t
+JOIN album AS a
+ON a.id = t.album_id;
+
+-- use DROP to drop a VIEW just as you would with any table
+DROP VIEW trackView;
+DROP VIEW IF EXISTS trackView;
+DROP VIEW joinedAlbum;
+DROP VIEW IF EXISTS joinedAlbum;
+
+
+
+
+
 
