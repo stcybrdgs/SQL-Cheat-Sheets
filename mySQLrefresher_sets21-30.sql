@@ -43,3 +43,30 @@ SELECT Region,
        SUM(Population) AS sumPopulation
 FROM Country 
 GROUP BY Region ORDER BY sumPopulation DESC;
+
+
+-- ///////////////////////////////////////////
+-- Nested Queries
+-- use a nested query to create a 'sub-select' 
+-- (rem: the result of a SELECT statement is a table that may be used like any db table)
+-- here, create a table with packed data for state and country codes:
+CREATE TABLE t ( a TEXT, b TEXT );
+INSERT INTO t VALUES ( 'NY0123', 'US4567' );
+INSERT INTO t VALUES ( 'AZ9437', 'GB1234' );
+INSERT INTO t VALUES ( 'CA1279', 'FR5678' );
+SELECT * FROM t;
+
+-- next, use SUBSTR() functions to unpack the data from the table:
+SELECT SUBSTR(a, 1, 2) AS State, SUBSTR(a, 3) AS SCode, 
+       SUBSTR(b, 1, 2) AS Country, SUBSTR(b, 3) AS CCode FROM t;
+
+-- next, turn the previous query into a 'sub-select' 
+-- pull Name from Country table and CCode from sub-select table
+SELECT co.Name, ss.CCode FROM(
+  SELECT SUBSTR(a, 1, 2) AS State, SUBSTR(a, 3) AS SCode, 
+         SUBSTR(b, 1, 2) AS Country, SUBSTR(b, 3) AS CCode FROM t
+  ) AS ss
+JOIN Country AS co 
+ON co.Code2 = ss.Country;
+
+
