@@ -1,5 +1,5 @@
 -- SQL REFRESHER w/ MySQL | Apache (see XAMP installation /SID/sid.php) 
-
+-- TESTING TESTING TESTING
 -- SELECT w/arithmetic operators and concept that NULL is not a value 
 SELECT COUNT(*) AS "Tot # Rows", COUNT(LifeExpectancy) AS "# LE Rows", (COUNT(*) - COUNT(LifeExpectancy)) AS "Diff" FROM Country;
 
