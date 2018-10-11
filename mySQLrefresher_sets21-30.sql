@@ -70,3 +70,27 @@ JOIN Country AS co
 ON co.Code2 = ss.Country;
 
 
+-- ///////////////////////////////////////////
+-- two techniques to get a list of albums with tracks where duration <= 90;
+--
+-- Technique # 1
+SELECT a.title AS Album, t.track_number AS TrkNum, t.title AS Track, t.duration AS Secs
+FROM album AS a
+JOIN track AS t 
+ON a.id = t.album_id
+WHERE t.duration < 90
+ORDER BY Album, Track;
+--
+-- Technique # 2 (use nested query)
+SELECT a.title AS Album, t.track_number AS TrkNum, t.title AS Track, t.duration AS Secs
+FROM album AS a
+JOIN (
+  SELECT album_id, track_number, duration, title
+  FROM track
+  WHERE duration <= 90 
+) AS t
+ON a.id = t.album_id
+ORDER BY a.title, t.track_number;
+
+
+
