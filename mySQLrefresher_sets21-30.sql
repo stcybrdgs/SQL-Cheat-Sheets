@@ -139,6 +139,12 @@ DROP VIEW IF EXISTS trackView;
 DROP VIEW joinedAlbum;
 DROP VIEW IF EXISTS joinedAlbum;
 
+-- simple JOIN without aliases
+SELECT * FROM people JOIN states
+ON people.state = states.state_abbrev
+WHERE people.first_name LIKE 'j%'
+AND states.region = 'South';
+
 
 
 
