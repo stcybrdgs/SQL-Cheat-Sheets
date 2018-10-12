@@ -145,6 +145,14 @@ ON people.state = states.state_abbrev
 WHERE people.first_name LIKE 'j%'
 AND states.region = 'South';
 
+-- use LEFT (OUTER) JOIN to reveal state codes that 
+-- do not exist in the people table
+SELECT DISTINCT p.state AS PState, s.state_abbrev AS SState  
+FROM states AS s
+LEFT JOIN people AS p 
+ON p.state = s.state_abbrev
+ORDER BY PState;
+
 
 
 
