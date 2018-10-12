@@ -153,8 +153,22 @@ LEFT JOIN people AS p
 ON p.state = s.state_abbrev
 ORDER BY PState;
 
+-- create a view to aid in calculating % of contestants from each state
+CREATE VIEW myView AS
+SELECT state, COUNT(first_name) AS totalQPs
+FROM people
+GROUP BY state
+ORDER BY totalQPs DESC;
+-- calculate % of contestants from each state
+SELECT state, totalQPs, (totalQPs/1000.0)*100 AS percent
+FROM myView;
 
-
+-- show which cities had 3 or more contestants that
+-- scored the max number of quiz_points
+SELECT city, COUNT(city) AS tot, state FROM people 
+WHERE quiz_points = (SELECT MAX(quiz_points) FROM people)
+GROUP BY city HAVING tot >= 3
+ORDER BY tot DESC, state, city;
 
 
 
