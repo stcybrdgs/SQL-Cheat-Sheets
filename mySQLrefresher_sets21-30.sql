@@ -3,6 +3,7 @@
 
 
 -- ///////////////////////////////////////////
+-- AGGREGATE FUNCTIONS
 -- SELECT name FROM sqlite_master where type='table';
 -- SELECT * FROM album LIMIT 1;
 -- SELECT * FROM track LIMIT 1;
@@ -25,7 +26,6 @@ ORDER BY Tracks DESC, Album;
 -- and the HAVING clause comes after GROUP BY
 -- so that the WHERE clause operates on data before the aggregation
 -- and the HAVING clause operates on data after the aggregation
-
 SELECT a.title AS Album, COUNT(t.track_number) AS Tracks
 FROM album AS a
 JOIN track AS t
@@ -46,7 +46,7 @@ GROUP BY Region ORDER BY sumPopulation DESC;
 
 
 -- ///////////////////////////////////////////
--- Nested Queries
+-- NESTED QUERIES
 -- use a nested query to create a 'sub-select' 
 -- (rem: the result of a SELECT statement is a table that may be used like any db table)
 -- here, create a table with packed data for state and country codes:
@@ -94,6 +94,7 @@ ORDER BY a.title, t.track_number;
 
 
 -- ///////////////////////////////////////////
+-- VIEWS
 -- in SQL, you can save your query as a VIEW and 
 -- re-use that view as if it were a table
 
@@ -139,6 +140,9 @@ DROP VIEW IF EXISTS trackView;
 DROP VIEW joinedAlbum;
 DROP VIEW IF EXISTS joinedAlbum;
 
+
+-- ///////////////////////////////////////////
+-- MISCL JOIN QUERIES
 -- simple JOIN without aliases
 SELECT * FROM people JOIN states
 ON people.state = states.state_abbrev
@@ -153,6 +157,9 @@ LEFT JOIN people AS p
 ON p.state = s.state_abbrev
 ORDER BY PState;
 
+
+-- ///////////////////////////////////////////
+-- exploring ways to extract meaningful information from the people table
 -- create a view to aid in calculating % of contestants from each state
 CREATE VIEW myView AS
 SELECT state, COUNT(first_name) AS totalQPs
