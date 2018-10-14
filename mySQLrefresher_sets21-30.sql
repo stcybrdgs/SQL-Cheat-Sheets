@@ -1,7 +1,6 @@
 -- MySQL REFRESHER 
 -- sets 21-30
 
-
 -- ///////////////////////////////////////////
 -- AGGREGATE FUNCTIONS
 -- SELECT name FROM sqlite_master where type='table';
@@ -15,7 +14,6 @@ JOIN track AS t
 ON a.id=t.album_id
 GROUP BY a.id
 ORDER BY Tracks DESC, Album;
-
 
 --|  Album         |  Tracks
 --|  Kind of Blue  |  5
@@ -44,7 +42,6 @@ SELECT Region,
 FROM Country 
 GROUP BY Region ORDER BY sumPopulation DESC;
 
-
 -- ///////////////////////////////////////////
 -- NESTED QUERIES
 -- use a nested query to create a 'sub-select' 
@@ -69,7 +66,6 @@ SELECT co.Name, ss.CCode FROM(
 JOIN Country AS co 
 ON co.Code2 = ss.Country;
 
-
 -- ///////////////////////////////////////////
 -- two techniques to get a list of albums with tracks where duration <= 90;
 --
@@ -91,7 +87,6 @@ JOIN (
 ) AS t
 ON a.id = t.album_id
 ORDER BY a.title, t.track_number;
-
 
 -- ///////////////////////////////////////////
 -- VIEWS
@@ -140,7 +135,6 @@ DROP VIEW IF EXISTS trackView;
 DROP VIEW joinedAlbum;
 DROP VIEW IF EXISTS joinedAlbum;
 
-
 -- ///////////////////////////////////////////
 -- MISCL JOIN QUERIES
 -- simple JOIN without aliases
@@ -156,7 +150,6 @@ FROM states AS s
 LEFT JOIN people AS p 
 ON p.state = s.state_abbrev
 ORDER BY PState;
-
 
 -- ///////////////////////////////////////////
 -- exploring ways to extract meaningful information from the people table

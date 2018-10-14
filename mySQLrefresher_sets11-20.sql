@@ -1,8 +1,8 @@
 -- MySQL REFRESHER 
 -- sets 11-20
 
-
 -- ///////////////////////////////////////////
+-- USING LIKE, IN, DISTINCT, MAX, MIN
 -- There are two unique operators in SQL for filtering results: LIKE and IN
 -- Q1
 SELECT Name, Continent, Population
@@ -25,20 +25,28 @@ SELECT DISTINCT Region FROM Country;
 SELECT Name, SurfaceArea FROM Country ORDER BY SurfaceArea ASC LIMIT 1;  -- smallest area of land
 SELECT Name, SurfaceArea FROM Country ORDER BY SurfaceArea DESC LIMIT 1; -- largest area of land
 
+-- ///////////////////////////////////////////
+-- USING ORDER BY
 -- Examples of using ORDER BY to sort different column combinations:
+SELECT Name, Continent 
+FROM Country 
+ORDER BY Continent, Name;
 
-SELECT Name, Continent from Country ORDER BY Continent, Name;
-
-SELECT Name, Continent, Region from Country 
+SELECT Name, Continent, Region 
+FROM Country 
 ORDER BY Continent DESC, Region, Name;
 
 -- Examples of using ORDER BY to sort different column combinations:
+SELECT Name, Continent 
+FROM Country 
+ORDER BY Continent, Name;
 
-SELECT Name, Continent from Country ORDER BY Continent, Name;
-
-SELECT Name, Continent, Region from Country 
+SELECT Name, Continent, Region 
+FROM Country 
 ORDER BY Continent DESC, Region, Name;
 
+-- ///////////////////////////////////////////
+-- USING CASE WHEN
 -- use CASE WHEN to test cell against a value:
 SELECT 
  CASE WHEN a = 1 THEN 'small'
@@ -52,6 +60,8 @@ SELECT
  FROM booltest
 ;
 
+-- ///////////////////////////////////////////
+-- USING JOINS WITH ALIASES
 -- widgetCustomer: item_id, customer_id, date, price, quantity
 -- widgetLog:      item_id, customer_id, quan, price, stamp
 UPDATE right SET id = 4 WHERE id = 6;
@@ -81,7 +91,8 @@ SELECT * FROM customer;
 SELECT * FROM sale;
 SELECT * FROM item;
 
--- String Functions
+-- ///////////////////////////////////////////
+-- USING STRING FUNCTIONS
 -- A string literal:
 SELECT 'this here''s a literal' AS myLiteral;
 
@@ -103,7 +114,6 @@ TRIM( string );
 UPPER( string );
 LOWER( string );
 
-
 SELECT SUBSTR('this string', 6);
 SELECT SUBSTR('this string', 6, 3);
 SELECT title, artist,
@@ -113,7 +123,8 @@ SELECT title, artist,
 FROM album
 ORDER BY released;
 
--- 02 DATE/TIME functions
+-- ///////////////////////////////////////////
+-- USING DATE/TIME FUNCTIONS
 -- :memory:
 SELECT DATETIME('now');
 SELECT DATE('now');
