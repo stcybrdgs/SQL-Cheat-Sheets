@@ -170,5 +170,15 @@ WHERE quiz_points = (SELECT MAX(quiz_points) FROM people)
 GROUP BY city HAVING tot >= 3
 ORDER BY tot DESC, state, city;
 
+-- using the people table, build a small report showing each team's:
+--   num people, total pointsm, avg score
+SELECT 	team,
+		COUNT(first_name) AS totPlayers, 
+		SUM(quiz_points) AS totPoints,
+		ROUND(AVG(quiz_points)) AS avgPoints
+FROM people
+GROUP BY team
+ORDER BY team;
+
 
 
