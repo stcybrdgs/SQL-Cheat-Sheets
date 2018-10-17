@@ -209,4 +209,10 @@ AND (
 	address LIKE '%El%'
 	)
 
+-- ///////////////////////////////////////////
+-- if you need to concatenate strings in MySQL, use CONCAT() instead of pipes ||, ie:
+SELECT CONCAT(first_name, ' ', last_name) AS name,
+LENGTH(CONCAT(first_name, ' ', last_name)) AS length
+FROM actor
+ORDER BY length DESC
 
