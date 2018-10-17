@@ -216,6 +216,7 @@ SELECT
   LENGTH(CONCAT(first_name, ' ', last_name)) AS length
 FROM actor
 ORDER BY length DESC
+--
 -- using LEFT() & RIGHT() to cut up a string
 -- and CONCAT() to rejoin it
 SELECT 
@@ -225,6 +226,7 @@ SELECT
   ) AS name
 FROM actor
 WHERE first_name = 'PENELOPE'
+--
 -- using LEFT() & RIGHT() to cut up a string
 -- and CONCAT() to rejoin it 
 -- with LENGTH() to return value of 5 to RIGHT()
@@ -235,3 +237,43 @@ SELECT
   ) AS name
 FROM actor
 WHERE first_name = 'PENELOPE'
+--
+-- use TRIM() to remove spaces from your string:
+SELECT * FROM actor 
+WHERE first_name = TRIM('  PENELOPE  ');
+--
+-- use LEADING FROM and/or TRAILING FROM with TRIM() 
+-- to remove specific characters from either end of a string;
+-- this technique may come in handing when you need to remove leading 0s
+SELECT description, TRIM(LEADING 'A ' FROM description) FROM film_text;
+SELECT description, TRIM(TRAILING ' ' FROM description) FROM film_text;
+-- use LOCATE() to retrieve the position of one string inside another
+-- syntax: LOCATE( 'yourSearchString', field_name )
+-- REM:  use LOCATE() in MySQL and Oracle
+--       use POSITION() in PostgreSQL
+--       use CHARINDEX() Microsoft
+SELECT first_name, LOCATE('lope', first_name) from actor
+
+-- ///////////////////////////////////////////
+-- BE CAREFUL when using aliases; keep in mind that the db software may not have determined
+-- the column name by the time it reaches the WHERE clause, so it may not 
+-- recognize your alias name at that point in the query; however,
+-- it will have determined the column name by the time it reaches your ORDER BY
+-- clause, if one exists. Therefore, stick to your long name for the WHERE clause, 
+-- and then feel free to use your alias name in the ORDER BY clause
+--
+-- REM: this query will fail
+SELECT 
+  CONCAT(first_name, ' ', last_name) AS name,
+  LENGTH(CONCAT(first_name, ' ', last_name)) AS length
+FROM actor
+WHERE length > 17
+ORDER BY length DESC;
+--
+-- REM: this query will succeed
+SELECT 
+  CONCAT(first_name, ' ', last_name) AS name,
+  LENGTH(CONCAT(first_name, ' ', last_name)) AS length
+FROM actor
+WHERE LENGTH(CONCAT(first_name, ' ', last_name)) > 17
+ORDER BY length DESC;
