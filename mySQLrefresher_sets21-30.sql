@@ -211,8 +211,27 @@ AND (
 
 -- ///////////////////////////////////////////
 -- if you need to concatenate strings in MySQL, use CONCAT() instead of pipes ||, ie:
-SELECT CONCAT(first_name, ' ', last_name) AS name,
-LENGTH(CONCAT(first_name, ' ', last_name)) AS length
+SELECT 
+  CONCAT(first_name, ' ', last_name) AS name,
+  LENGTH(CONCAT(first_name, ' ', last_name)) AS length
 FROM actor
 ORDER BY length DESC
-
+-- using LEFT() & RIGHT() to cut up a string
+-- and CONCAT() to rejoin it
+SELECT 
+  CONCAT(
+    LEFT(first_name, 3),
+    RIGHT(first_name, 5)
+  ) AS name
+FROM actor
+WHERE first_name = 'PENELOPE'
+-- using LEFT() & RIGHT() to cut up a string
+-- and CONCAT() to rejoin it 
+-- with LENGTH() to return value of 5 to RIGHT()
+SELECT 
+  CONCAT(
+    LEFT(first_name, 3),
+    RIGHT(first_name, LENGTH(first_name)-3)
+  ) AS name
+FROM actor
+WHERE first_name = 'PENELOPE'
