@@ -1,2 +1,2 @@
 # mySQL-refresher
-A scratch sheet of SQLite queries for refresher purposes.
+A scratch sheet of SQLite and MySQL queries for refresher purposes.
