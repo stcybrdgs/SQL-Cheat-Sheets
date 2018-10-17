@@ -180,5 +180,33 @@ FROM people
 GROUP BY team
 ORDER BY team;
 
+-- ///////////////////////////////////////////
+-- BE CAREFUL when using AND/OR filters because the db software
+-- will read and apply the filters in the order they appear;
+-- sometimes you will need to use parenthesis to specify 
+-- how you want the filters combined and applied
+--
+-- Q1: returns results where district = 'Buenos Aires' & address LIKE '%El%'
+-- THEN returns results where address LIKE '%Al%'
+SELECT * FROM address
+WHERE district = 'Buenos Aires'
+AND address LIKE '%El%'
+OR address LIKE '%Al%'
+--
+-- Q2: returns results where district = 'Buenos Aires' & address LIKE '%Al%'
+-- THEN returns results where address LIKE '%El%'
+SELECT * FROM address
+WHERE district = 'Buenos Aires'
+AND address LIKE '%Al%'
+OR address LIKE '%El%'
+--
+-- Q3: returns results where district = 'Buenos Aires' 
+-- & address LIKE EITHER '%El%' OR '%Al%'
+SELECT * FROM address
+WHERE district = 'Buenos Aires'
+AND (
+	address LIKE '%Al%' OR 
+	address LIKE '%El%'
+	)
 
 
