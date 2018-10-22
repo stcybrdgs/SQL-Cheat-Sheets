@@ -293,7 +293,7 @@ SELECT DATE(last_update) FROM `actor`
 UNION 
 SELECT DATE(last_update) FROM `address`
 --
--- rem: use a leading column to demarcate which 
+-- rem: use a leading 'synthetic' column to demarcate which 
 -- result set is which
 SELECT 'actor' AS 'table', DATE(last_update) FROM `actor`
 UNION
