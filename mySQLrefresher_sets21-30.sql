@@ -277,3 +277,24 @@ SELECT
 FROM actor
 WHERE LENGTH(CONCAT(first_name, ' ', last_name)) > 17
 ORDER BY length DESC;
+
+-- ///////////////////////////////////////////
+-- UNION & UNION ALL
+--
+-- us UNION to return a stacked result set
+-- ie table_A results are returned vertically atop table_B results
+SELECT DATE(last_update) FROM `actor`
+UNION 
+SELECT DATE(last_update) FROM `address`
+--
+-- note that UNION by default only returns distinct values;
+-- if you want all values returned, then use UNION ALL
+SELECT DATE(last_update) FROM `actor`
+UNION 
+SELECT DATE(last_update) FROM `address`
+--
+-- rem: use a leading column to demarcate which 
+-- result set is which
+SELECT 'actor' AS 'table', DATE(last_update) FROM `actor`
+UNION
+SELECT 'address' AS 'table', DATE(last_update) FROM `address`
