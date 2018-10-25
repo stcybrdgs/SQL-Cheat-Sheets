@@ -298,3 +298,20 @@ SELECT DATE(last_update) FROM `address`
 SELECT 'actor' AS 'table', DATE(last_update) FROM `actor`
 UNION
 SELECT 'address' AS 'table', DATE(last_update) FROM `address`
+
+
+-- ///////////////////////////////////////////
+/*
+  DDL is a syntax similar to a programming language for 
+  defining data structures, especially database schemas. 
+  Use it in SQL Server instead of SSMS interface to
+  create your table structures
+*/
+-- Example 1:
+CREATE TABLE EmployeesDuplicate (
+  EmployeeID int IDENTITY(1,1) NOT NULL,
+  FirstName nvarchar(50) NOT NULL,
+  LastName nvarchar(50) NOT NULL,
+  Position nvarchar(50) NULL,
+  Email nvarchar(50) NOT NULL
+);
