@@ -317,3 +317,14 @@ CREATE TABLE EmployeesDuplicate (
   Position nvarchar(50) NULL,
   Email nvarchar(50) NOT NULL
 );
+-- Example 2:
+ALTER TABLE EmployeesDuplicate
+ADD
+  MiddleName nvarchar(50),
+  BonusPercent int,
+  PerformanceRating int
+;
+-- Example 3:
+ALTER TABLE EmployeesDuplicate
+DROP
+  Salary, MiddleName, BonusPercent, PerformanceRating;
