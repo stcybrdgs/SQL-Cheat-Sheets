@@ -39,3 +39,29 @@ VALUES (
 	'03:25:00',		-- Duration
 	'Stacy'			-- Composer
 	);
+
+/*
+Rem: the use of brackets in SQL Server is meant to avoid errors on table names, db names, and fields
+in case the string contains special characters or key words reserved by SQL. If there are no 
+special characters or keywords in the strings, then the brackets are unnecessary. However, all of
+your auto-generated code in SSMS will include the brackets as best practice.
+
+Note that the following two SELECT statements are equivalent, although one uses brackets and the other does not.
+*/
+--
+-- Example 1:
+SELECT TOP 10 [EmployeeID]
+      ,[FirstName]
+      ,[LastName]
+      ,[Position]
+      ,[Email]
+  FROM [H+Active].[dbo].[Employees]
+-- 
+-- Example 2:
+USE [H+Active];
+SELECT TOP 10 EmployeeID
+      ,FirstName
+      ,LastName
+      ,Position
+      ,Email
+  FROM Employees;
