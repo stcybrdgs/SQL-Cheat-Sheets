@@ -308,6 +308,8 @@ SELECT 'address' AS 'table', DATE(last_update) FROM `address`
   create your table structures
 */
 -- Example 1:
+USE [H+Active];
+
 CREATE TABLE EmployeesDuplicate (
   EmployeeID int IDENTITY(1,1) NOT NULL,
   FirstName nvarchar(50) NOT NULL,
