@@ -74,3 +74,13 @@ FROM Customers
 EXCEPT
 SELECT CustomerID
 FROM Invoices;
+
+/*
+  Remember you can use NOT whenever you want to exclude results;
+  The following examples are equivalent
+*/
+ -- example with NOT
+ SELECT * FROM Customers WHERE NOT State = 'FL';
+
+-- example with <>
+SELECT * FROM Customers WHERE State <> 'FL';
