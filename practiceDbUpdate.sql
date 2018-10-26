@@ -65,3 +65,31 @@ SELECT TOP 10 EmployeeID
       ,Position
       ,Email
   FROM Employees;
+
+
+/*
+  Drop and rebuild the Departments table in SSMS using T-SQL instead of GUI features
+*/
+USE [H+Active];
+
+DROP TABLE [dbo].[Departments];
+
+CREATE TABLE Departments (
+	DepartmentID char(3) NOT NULL,
+	DepartmentName char(30) NOT NULL,
+	DepartmentHead INT NOT NULL,
+	BuildingNumber SMALLINT NOT NULL,
+	ModificationDate TIMESTAMP NOT NULL,
+	CONSTRAINT PK_Departments PRIMARY KEY CLUSTERED (DepartmentID)
+);
+
+INSERT INTO Departments (
+	DepartmentID, DepartmentName, DepartmentHead, BuildingNumber
+)
+VALUES('mkt', 'Marketing', 4, 3 );
+
+ALTER TABLE Departments
+ADD CONSTRAINT CK_BuildingNumber
+CHECK (BuildingNumber >= 1 AND BuildingNumber <= 5);
+
+CREATE UNIQUE INDEX IX_Departments ON Departments(DepartmentName);
