@@ -123,4 +123,5 @@ FROM	ProductOptions AS po INNER JOIN
         LineItems AS li ON po.OptionID = li.OptionID INNER JOIN
         Invoices ON li.InvoiceID = Invoices.InvoiceID
 GROUP BY po.Color
-ORDER BY Qty DESC
+-- ORDER BY Qty DESC
+-- note: SQL Server does not allow the ORDER BY clause to be used in VIEWs 
