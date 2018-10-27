@@ -108,3 +108,18 @@ FROM	LineItems AS li INNER JOIN
         ProductListing AS pl ON po.ProductID = pl.ProductID
 GROUP BY pl.ProductID, pl.Item, pl.Description
 ORDER BY Qty DESC
+
+
+
+--//////////////////////////////////////////////////////////////////
+/*
+** use T-SQL to create a view to show which colors of items in the 
+** product list have sold the most and which have sold the least
+*/
+-- CREATE VIEW AS vwMaxMinNumColorsSold
+SELECT	po.Color, SUM(li.Quantity) AS Qty
+FROM	ProductOptions AS po INNER JOIN
+        LineItems AS li ON po.OptionID = li.OptionID INNER JOIN
+        Invoices ON li.InvoiceID = Invoices.InvoiceID
+GROUP BY po.Color
+ORDER BY Qty DESC
