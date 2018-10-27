@@ -1,5 +1,7 @@
 /* MISCL Database Foundations Material in SSMS */
 
+
+--//////////////////////////////////////////////////////////////////
 /*
 Rem: the use of brackets in SQL Server is meant to avoid errors on table names, db names, and fields
 in case the string contains special characters or key words reserved by SQL. If there are no 
@@ -27,6 +29,8 @@ SELECT TOP 10 EmployeeID
   FROM Employees;
 
 
+
+--//////////////////////////////////////////////////////////////////
 /*
   Drop and rebuild the Departments table in SSMS using T-SQL instead of GUI features
 */
@@ -55,6 +59,8 @@ CHECK (BuildingNumber >= 1 AND BuildingNumber <= 5);
 CREATE UNIQUE INDEX IX_Departments ON Departments(DepartmentName);
 
 
+
+--//////////////////////////////////////////////////////////////////
 /*
   to find out if a record has a matching record in a related table (or not), use EXCEPT and INTERSECT
 */
@@ -84,3 +90,21 @@ FROM Invoices;
 
 -- example with <>
 SELECT * FROM Customers WHERE State <> 'FL';
+
+
+
+--//////////////////////////////////////////////////////////////////
+/*
+-- write a T-SQL query to create a view
+-- to provide an aggregate function
+-- that adds up the number of each product sold
+*/
+CREATE VIEW vwNumProductsSold
+AS
+SELECT	SUM(li.Quantity) AS Qty, pl.ProductID, pl.Item, pl.Description
+FROM	LineItems AS li INNER JOIN
+        Invoices ON li.InvoiceID = Invoices.InvoiceID INNER JOIN
+        ProductOptions AS po ON li.OptionID = po.OptionID INNER JOIN
+        ProductListing AS pl ON po.ProductID = pl.ProductID
+GROUP BY pl.ProductID, pl.Item, pl.Description
+-- ORDER BY Qty DESC
