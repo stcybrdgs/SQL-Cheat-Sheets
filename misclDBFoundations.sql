@@ -107,4 +107,4 @@ FROM	LineItems AS li INNER JOIN
         ProductOptions AS po ON li.OptionID = po.OptionID INNER JOIN
         ProductListing AS pl ON po.ProductID = pl.ProductID
 GROUP BY pl.ProductID, pl.Item, pl.Description
--- ORDER BY Qty DESC
+ORDER BY Qty DESC
