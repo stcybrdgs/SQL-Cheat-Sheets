@@ -116,7 +116,8 @@ ORDER BY Qty DESC
 ** use T-SQL to create a view to show which colors of items in the 
 ** product list have sold the most and which have sold the least
 */
--- CREATE VIEW AS vwMaxMinNumColorsSold
+CREATE VIEW vwPopularColors
+AS 
 SELECT	po.Color, SUM(li.Quantity) AS Qty
 FROM	ProductOptions AS po INNER JOIN
         LineItems AS li ON po.OptionID = li.OptionID INNER JOIN
