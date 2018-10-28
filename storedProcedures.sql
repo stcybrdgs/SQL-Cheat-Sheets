@@ -14,7 +14,7 @@ CREATE PROCEDURE PopularColors
 AS
 BEGIN
 	SELECT	po.Color, SUM(li.Quantity) AS Qty
-	FROM    dbo.ProductOptions AS po INNER JOIN
+	FROM	dbo.ProductOptions AS po INNER JOIN
 			dbo.LineItems AS li ON po.OptionID = li.OptionID INNER JOIN
 			dbo.Invoices ON li.InvoiceID = dbo.Invoices.InvoiceID
 	GROUP BY po.Color
@@ -27,7 +27,7 @@ ALTER PROCEDURE PopularColors
 AS
 BEGIN
 	SELECT	po.Color AS productColor, SUM(li.Quantity) AS Qty
-	FROM    dbo.ProductOptions AS po INNER JOIN
+	FROM	dbo.ProductOptions AS po INNER JOIN
 			dbo.LineItems AS li ON po.OptionID = li.OptionID INNER JOIN
 			dbo.Invoices ON li.InvoiceID = dbo.Invoices.InvoiceID
 	GROUP BY po.Color
