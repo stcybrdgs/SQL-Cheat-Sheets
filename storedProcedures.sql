@@ -5,6 +5,8 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+
+
 -- =============================================
 -- Author:		Stacy
 -- Create date: 10-28-2018
@@ -19,6 +21,23 @@ BEGIN
 			dbo.Invoices ON li.InvoiceID = dbo.Invoices.InvoiceID
 	GROUP BY po.Color
 END
+
+
+-- =============================================
+-- Author:		Stacy
+-- Create date: 10-28-2018
+-- Description:	Find customers by state
+-- =============================================
+CREATE PROCEDURE findCustomersByState 
+	-- Add the parameters for the stored procedure here
+	@state char(2) = 'CA'
+AS
+BEGIN
+	SELECT FirstName, LastName, Phone, City, State, Zip
+	FROM Customers
+	WHERE State = @state;
+END
+GO
 
 
 --///////////////////////////////////////////////////
