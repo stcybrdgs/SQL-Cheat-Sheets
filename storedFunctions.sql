@@ -2,9 +2,11 @@
 **  Functions in SQL provide a consistent way to accept parameters into logical routines.  
 **  This code creates a Scalar function (ie, returns a single value from the function)
 */
---
+
+
+-- ///////////////////////////////////////////////////
 -- add a new table to the database for sales tax figures
-USE [H+Active]
+USE [H+Active];
 
 CREATE TABLE SalesTaxRates (
     State nchar(2) NOT NULL,
@@ -37,3 +39,17 @@ BEGIN
 
 END
 GO
+
+
+-- ///////////////////////////////////////////////////
+-- use your new CalcSalesTax function in a query
+SELECT  Invoices.InvoiceID, Customers.FirstName, Customers.LastName, Customers.State, 
+		InvoiceTotals.InvoiceTotal, SalesTaxRates.TaxRate, 
+		-- use new CalcSalesTax function to return TaxDue values
+		-- based on existing values for InvoiceTotal and TaxRate
+		dbo.CalcSalesTax(InvoiceTotals.InvoiceTotal, SalesTaxRates.TaxRate) AS TaxDue
+FROM    InvoiceTotals INNER JOIN
+        Invoices ON InvoiceTotals.InvoiceID = Invoices.InvoiceID INNER JOIN
+        Customers ON Invoices.CustomerID = Customers.CustomerID INNER JOIN
+        SalesTaxRates ON Customers.State = SalesTaxRates.State
+ORDER BY Invoices.InvoiceID;
