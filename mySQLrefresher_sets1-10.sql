@@ -1,6 +1,14 @@
 -- MySQL REFRESHER 
 -- sets 1-10
 
+
+-- ///////////////////////////////////////////
+-- copy a table from one db into another in SQL Server
+SELECT *
+INTO [Practice List].[dbo].[MyProducts]
+FROM [H+Active].[dbo].[MyProducts]
+
+
 -- ///////////////////////////////////////////
 -- SELECT w/arithmetic operators and concept that NULL is not a value 
 SELECT COUNT(*) AS "Tot # Rows", COUNT(LifeExpectancy) AS "# LE Rows", (COUNT(*) - COUNT(LifeExpectancy)) AS "Diff" FROM Country;
