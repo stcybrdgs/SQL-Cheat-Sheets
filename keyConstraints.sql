@@ -27,3 +27,19 @@ DROP CONSTRAINT PK_CreditCardDetails;
 -- add a new PK constraint
 ALTER TABLE CreditCardDetails
 ADD CONSTRAINT PK_CreditCardDetails PRIMARY KEY CLUSTERED (CreditCardNumber);
+
+
+/*
+** T-SQL for creating an FK constraint to an existing table
+** rem the Referential Integrity protections are enabled by default
+*/
+ALTER TABLE [Practice List].[dbo].[CustomerCreditCards]
+ADD CONSTRAINT 
+FK_CustomerCreditCards_CreditCardDetails   -- ChildTable_ParentTable
+FOREIGN KEY                                -- type of constraint
+(CreditCardNumber)                         -- ChildField to link to
+REFERENCES 
+CreditCardDetails(CreditCardNumber)        -- ParentTable(ParentField) to link to
+ON DELETE CASCADE                          -- enable CASCADE on Parent DELETE
+ON UPDATE CASCADE                          -- enable CASCADE on Parent UPDATE
+;
