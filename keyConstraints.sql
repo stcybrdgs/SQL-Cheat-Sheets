@@ -10,6 +10,14 @@ CREATE TABLE CreditCardDetails (
 	CONSTRAINT PK_CreditCardDetails PRIMARY KEY CLUSTERED (CreditCardNumber)
 );
 
+-- create table with Composite Constraint functioning as PK
+CREATE TABLE CustomerCreditCards (
+	CustomerID          int         NOT NULL,
+	CreditCardNumber    char(16)    NOT NULL,
+	PrimaryPayment      bit,
+	CONSTRAINT PK_CustomerCreditCards PRIMARY KEY CLUSTERED( CustomerID, CreditCardNumber )
+);
+
 -- modify an existing PK:
 --
 -- remove existing PK constraint
