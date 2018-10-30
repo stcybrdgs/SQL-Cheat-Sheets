@@ -45,5 +45,5 @@ EXECUTE sp_helpindex Customers;
 -------------------------------------------------------------------------------------------------
 -- LastName            |  nonclustered located on PRIMARY	                   |  LastName
 -------------------------------------------------------------------------------------------------
--- PK_Customers	       |  clustered, unique, primary key located on PRIMARY	   |  CustomerID
+-- PK_Customers        |  clustered, unique, primary key located on PRIMARY	   |  CustomerID
 -------------------------------------------------------------------------------------------------
