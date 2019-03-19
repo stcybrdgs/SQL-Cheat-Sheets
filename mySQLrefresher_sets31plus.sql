@@ -2,14 +2,15 @@
 -- sets 31 +
 
 -- SSMS transformations for Northwind Data Set
+-- CREATE new test table
 CREATE TABLE MyAddress(
  DelAddress TEXT
 );
 UPDATE MyAddress SET DelAddress = (SELECT ShipAddress FROM Orders) WHERE 
 SELECT ShipAddress FROM Orders
 
-
--- Northwind Order Join
+-- CREATE mock-up of target joined table
+-- ie, joining the Northwind tables Orders and [Order Details]
 CREATE TABLE Orders_OrderDetails(
     CustomerID nchar(5),
 	OrderDate datetime,
@@ -22,8 +23,7 @@ CREATE TABLE Orders_OrderDetails(
 	Discount real
 );
 
-
--- inserts for Northwind
+-- INSERTS for Northwind mock-up table
 SELECT * INTO Orders_OrderDetails2 
 FROM(
 	SELECT 
@@ -38,7 +38,8 @@ FROM(
 	ON o.OrderID = od.OrderID
 )
 
-
+-- JOIN Orders to [Order Details]
+-- while creating inferred data columns for Fiscal Qtr
 SELECT o.CustomerID as CustomerID, 	   
        FORMAT(o.OrderDate, 'yyyy') as OrderYear,
        CASE 
